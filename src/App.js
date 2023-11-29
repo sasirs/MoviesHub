@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-
+import SearchIcon from "@mui/icons-material/Search";
 import MovieCard from "./MovieCard";
 
 const apiUrl = "http://www.omdbapi.com/?apikey=a68eba80";
@@ -11,7 +11,7 @@ const App = () => {
   }, []);
 
   const searchMovies = async (title) => {
-    //console.log("searching " + title);
+    console.log("searching " + title);
     const response = await fetch(`${apiUrl}&s=${title}`);
     const data = await response.json();
     setMovies(data.Search);
@@ -28,7 +28,11 @@ const App = () => {
 
       <div className="search">
         <input placeholder="Search for movies" value={searchTerm} onChange={(e) => setSerchTerm(e.target.value)}></input>
-        <img src="" alt="+" onClick={() => searchMovies("batman")} />
+        {/* <SearchIcon alt="+" onClick={() => searchMovies("batman")} /> */}
+        <span alt="+" onClick={() => searchMovies(searchTerm)}>
+          <SearchIcon />
+        </span>
+        {/* <img src={<SearchIcon />} alt="+" onClick={() => searchMovies("batman")} /> */}
       </div>
       {/* {console.log(movies)} */}
       {movies?.length > 0 ? (
